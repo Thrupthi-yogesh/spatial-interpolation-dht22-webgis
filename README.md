@@ -13,19 +13,13 @@ A network of DHT22 sensors connected to STM32 Nucleo-L476RG microcontrollers was
 
 ## Workflow
 
-DHT22 Sensors
-      ↓
-STM32 Microcontroller
-      ↓
-CSV Data Collection
-      ↓
-Data Processing
-      ↓
-IDW Spatial Interpolation
-      ↓
-Temperature & Humidity Maps
-      ↓
-   WebGIS
+- DHT22 Sensors  
+- STM32 Microcontroller  
+- CSV Data Collection  
+- Data Processing  
+- IDW Spatial Interpolation  
+- Temperature & Humidity Maps  
+- WebGIS
 
 ## Technologies Used
 
