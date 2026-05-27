@@ -14,6 +14,14 @@ body{display:flex;flex-direction:column;position:fixed;inset:0;background:#b8cfe
 select{background:#253040;border:1px solid #445;color:#ecf0f1;
   border-radius:5px;padding:5px 9px;font-size:.84rem;}
 input[type=range]{accent-color:#c0882a;flex:1;min-width:120px;height:6px;}
+input[type=url]{background:#253040;border:1px solid #445;color:#ecf0f1;
+  border-radius:5px;padding:5px 9px;font-size:.82rem;font-family:monospace;
+  min-width:260px;max-width:380px;flex:1;}
+input[type=url]::placeholder{color:#667;font-style:italic;}
+input[type=url]:focus{outline:none;border-color:#c0882a;box-shadow:0 0 0 2px rgba(192,136,42,.3);}
+#dataRow{display:flex;align-items:center;flex-wrap:wrap;gap:10px;width:100%;}
+.url-ctrl{flex:1;min-width:240px;}
+#controlsRow{display:none;}
 .btn{background:#c0882a;color:#fff;border:none;border-radius:5px;
   padding:7px 16px;font-size:.86rem;cursor:pointer;font-weight:bold;white-space:nowrap;}
 .btn:hover{background:#a0701e;}

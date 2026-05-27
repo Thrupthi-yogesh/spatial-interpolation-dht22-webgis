@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NITW IDW Interpolation WebGIS</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- Toolbar -->
+<div id="toolbar">
+  <h1>🗺 Spatial Interpolation (IDW) of Temperature and Humidity — NITW Campus</h1>
+
+  <!-- Data URL inputs row -->
+  <div id="dataRow">
+    <div class="ctrl url-ctrl">
+      <label>📄 Stations CSV URL:</label>
+      <input type="url" id="stationsUrl" placeholder="https://example.com/stations.csv" spellcheck="false"/>
+    </div>
+    <div class="ctrl url-ctrl">
+      <label>🗺 Boundary CSV URL:</label>
+      <input type="url" id="boundaryUrl" placeholder="https://example.com/boundary.csv" spellcheck="false"/>
+    </div>
+    <button class="btn" id="loadBtn">⬇ Load Data</button>
+    <span id="loadMsg" style="font-size:.75rem;color:#f1d060;font-family:monospace;"></span>
+  </div>
+
+  <!-- Controls row (hidden until data is loaded) -->
+  <div id="controlsRow" style="display:none;width:100%;display:none;flex-wrap:wrap;gap:14px;align-items:center;">
+    <div class="ctrl">
+      <label>Variable:</label>
+      <select id="varSel">
+        <option value="temp">Temperature (°C)</option>
+        <option value="hum">Humidity (%)</option>
+      </select>
+    </div>
+    <div class="ctrl">
+      <label>IDW Power:</label>
+      <select id="powerSel">
+        <option value="1">p = 1</option>
+        <option value="2" selected>p = 2</option>
+        <option value="3">p = 3</option>
+      </select>
+    </div>
+    <div class="ctrl">
+      <label>Classes:</label>
+      <select id="classSel">
+        <option value="5">5</option>
+        <option value="7">7</option>
+        <option value="9" selected>9</option>
+      </select>
+    </div>
+    <div class="ctrl">
+      <label>Grid:</label>
+      <select id="gridSel">
+        <option value="60">60×60</option>
+        <option value="100" selected>100×100</option>
+        <option value="150">150×150</option>
+      </select>
+    </div>
+    <div class="ctrl" style="flex:1;gap:6px;min-width:160px;">
+      <label>Time:</label>
+      <input type="range" id="timeSlider" min="0" max="95" value="0">
+      <span id="timeDisp">00:00</span>
+    </div>
+    <button class="btn" id="playBtn" style="min-width:60px;">▶ Play</button>
+    <div class="ctrl">
+      <label>Speed:</label>
+      <select id="speedSel">
+        <option value="600">Slow</option>
+        <option value="350" selected>Normal</option>
+        <option value="150">Fast</option>
+      </select>
+    </div>
+    <button class="btn" id="reloadBtn" style="background:#445;min-width:80px;">↩ Change Data</button>
+  </div>
+</div>
+
+<!-- Map -->
+<div id="mapWrap">
+  <div id="map"></div>
+  <div id="mapFrame"></div>
+
+  <div id="titleBox">
+    <h2 id="mapTitle">IDW Interpolation of Temperature<br>NITW Campus, Warangal</h2>
+    <p id="mapSubtitle">Time: 00:00 | Power: p=2 | 3 Stations</p>
+  </div>
+
+  <div id="northArrow">
+    <svg viewBox="0 0 34 44" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="17,2 23,20 17,17 11,20" fill="#1b2838"/>
+      <polygon points="17,2 11,20 17,17 23,20" fill="#fff" stroke="#1b2838" stroke-width=".6"/>
+      <line x1="17" y1="2" x2="17" y2="40" stroke="#1b2838" stroke-width="1"/>
+      <circle cx="17" cy="28" r="8" fill="#1b2838"/>
+      <text x="17" y="32" text-anchor="middle" fill="#fff" font-size="8" font-weight="bold" font-family="Georgia,serif">N</text>
+    </svg>
+  </div>
+
+  <div id="legend">
+    <h3>LEGEND</h3>
+    <div id="legItems"></div>
+    <div class="leg-divider"></div>
+    <div id="legStations"></div>
+    <div id="varLabel"></div>
+  </div>
+
+  <div id="scalebar">
+    <canvas id="scaleCanvas" width="155" height="16"></canvas>
+    <div class="sc-label" id="scaleLabel">0 — 200 m</div>
+  </div>
+
+  <div id="coordBar">
+    <span id="cLon">Lon: —</span>
+    <span id="cLat">Lat: —</span>
+    <span id="cVal">Estimate: —</span>
+    <span id="cTime" style="margin-left:auto;color:#e8a831;"></span>
+  </div>
+</div>
+
+<script src="main.js"></script>
+</body>
+</html>
