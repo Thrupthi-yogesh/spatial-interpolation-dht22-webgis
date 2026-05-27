@@ -53,12 +53,6 @@ Temperature & Humidity Maps
 ### Sensor Setup
 ![Sensor Setup](images/sensor_setup.jpg)
 
-### Temperature Surface Map
-![Temperature Map](images/temperature_map.png)
-
-### Humidity Surface Map
-![Humidity Map](images/humidity_map.png)
-
 ### WebGIS Dashboard
 ![WebGIS](images/webgis_dashboard.png)
 
